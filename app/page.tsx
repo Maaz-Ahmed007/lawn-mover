@@ -109,7 +109,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="w-[150px] h-[220px] shrink-0 relative">
-                        <img src="/img1.jpg" className="w-full h-full object-cover rounded-[20px]" />
+                        <img src="/img1.jpg" className="w-full h-full object-cover rounded-[20px]"/>
                         <div className="absolute bottom-[10px] left-[10px] right-[10px]">
                             <div className="font-bold">
                                 Name Slider
