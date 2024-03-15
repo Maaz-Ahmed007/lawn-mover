@@ -13,7 +13,7 @@ export default function Home() {
             </header>
 
             {/* Carousel */}
-            <div className="w-screen h-screen overflow-hidden -mt-[50px] relative next">
+            <div className="w-screen h-screen overflow-hidden -mt-[50px] relative prev">
                 {/* list item */}
                 <div className="carousel-list">
                     <div className="item absolute inset-0">
