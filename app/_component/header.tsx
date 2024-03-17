@@ -2,21 +2,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
 export const Header = () => {
-    const next = document.getElementById('next')
-    let prev = document.getElementById('prev')
-    let carousel = document.getElementById('.carousel')
-    let listItem = document.getElementById('.carousel .list')
-    let thumbnail = document.getElementById('.carousel .thumbnail')
-
-    next.onclick = function() {
-        showSlider('next')
-    }
-
-    function showSlider(type: any) {
-        let itemSlider = document.querySelectorAll('.carousel .list .item')
-        let itemThumbnail = document.querySelectorAll('.carousel .thumbnail .item')
-    }
-
     return (
         <>
             <header className="w-[1140px] max-w-[80%] m-auto h-[50px] flex items-center relative z-50">
