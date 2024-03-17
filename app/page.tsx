@@ -1,135 +1,81 @@
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import Link from "next/link"
+'use client'
+
+import { useState } from "react"
+import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs"
+import { RxDotFilled } from "react-icons/rx"
 
 export default function Home() {
-    return (
-        <>
-            <header className="w-[1140px] max-w-[80%] m-auto h-[50px] flex items-center relative z-50">
-                <nav>
-                    <Link href="" className="text-[#eee] mr-10">Home</Link>
-                    <Link href="" className="text-[#eee] mr-10">Contacts</Link>
-                    <Link href="" className="text-[#eee] mr-10">Info</Link>
-                </nav>
-            </header>
+    const slides = [
+        {
+            url: 'https://images.unsplash.com/photo-1438786657495-640937046d18?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          },
+          {
+            url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80',
+          },
+          {
+            url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
+          },
+      
+          {
+            url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
+          },
+          {
+            url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
+          },
+    ]
 
-            {/* Carousel */}
-            <div className="w-screen h-screen overflow-hidden -mt-[50px] relative prev">
-                {/* list item */}
-                <div className="carousel-list">
-                    <div className="item absolute inset-0">
-                        <img src="/img1.jpg" className="w-full h-full object-cover" />
-                        <div className="absolute top-[20%] w-[1140px] max-w-[80%] left-[50%] -translate-x-[50%] pr-[30%] box-border text-white shadow-md">
-                            <div className="author font-bold tracking-[10px]">LUNDEV</div>
-                            <div className="title font-bold text-[5em] leading-[1.3em]">DESIGN SLIDER</div>
-                            <div className="topic font-bold text-[5em] leading-[1.3em] text-[#f1683a]">ANIMAL</div>
-                            <div className="des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit facere fuga esse aspernatur labore, recusandae nobis vero mollitia illum eum voluptas voluptate enim reprehenderit et reiciendis debitis quo. Numquam facere harum accusantium, similique odit deleniti vero quo quas aut nesciunt est autem delectus dignissimos error eum aperiam reprehenderit aspernatur dolores.
-                            </div>
-                            <div className="buttons grid grid-cols-two grid-rows-[40px] gap-[5px] mt-5">
-                                <button className="border-none bg-white text-black tracking-[3px] font-[Poppins] font-medium">SEE MORE</button>
-                                <button className="bg-transparent text-white border border-white tracking-[3px] font-[Poppins] font-medium">SUBSCRIBE</button>
-                            </div>
+    const [currentIndex, setCurrentIndex] = useState(0)
+    
+    const prevSlide = () => {
+        const isFirstSlide = currentIndex === 0
+        const newIndex = isFirstSlide ? slides.length -1 : currentIndex - 1
+        setCurrentIndex(newIndex)
+    }
+
+    const nextSlide = () => {
+        const isLastSlide = currentIndex === slides.length - 1
+        const newIndex = isLastSlide ? 0 : currentIndex + 1
+        setCurrentIndex(newIndex)
+    }
+
+    const goToSlide = (slideIndex: number) => {
+        setCurrentIndex(slideIndex)
+    }
+    
+    return (
+        <div className="max-w-[1440px] h-[780px] w-full m-auto py-14 px- relative group">
+            <div style={{backgroundImage: `url(${slides[currentIndex].url})`}} className="w-full h-full rounded-2xl bg-center bg-cover duration-500">
+                <div className="absolute top-[20%] w-[1140px] max-w-[80%] left-[50%] -translate-x-[50%] pr-[30%] box-border text-white shadow-md">
+                        <div className="text-emerald-900 font-bold tracking-[10px]">LAWN MOWER</div>
+                        <div className="text-emerald-900 font-bold text-[5em] leading-[1.3em]">DESIGN SLIDER</div>
+                        <div className="font-bold text-[5em] leading-[1.3em] text-transparent bg-clip-text bg-gradient-to-br from-lime-400 to-emerald-600">GRASS</div>
+                        <div className="text-black text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit facere fuga esse aspernatur labore, recusandae nobis vero mollitia illum eum voluptas voluptate enim reprehenderit et reiciendis debitis quo. Numquam facere harum accusantium, similique odit deleniti vero quo quas aut nesciunt est autem delectus dignissimos error eum aperiam reprehenderit aspernatur dolores.
+                        </div>
+                        <div className="grid grid-cols-two grid-rows-[40px] gap-[5px] mt-5">
+                            <button className="border-none bg-lime-300 text-emerald-900 tracking-[3px] font-[Poppins] font-medium">SEE MORE</button>
+                            <button className="bg-transparent text-lime-300 border border-lime-300 tracking-[3px] font-[Poppins] font-medium">SUBSCRIBE</button>
                         </div>
                     </div>
-                    <div className="item absolute inset-0 ">
-                        <img src="/img2.jpg" className="w-full h-full object-cover" />
-                        <div className="absolute top-[20%] w-[1140px] max-w-[80%] left-[50%] -translate-x-[50%] pr-[30%] box-border text-white shadow-md">
-                            <div className="author font-bold tracking-[10px]">LUNDEV</div>
-                            <div className="title font-bold text-[5em] leading-[1.3em]">DESIGN SLIDER</div>
-                            <div className="topic font-bold text-[5em] leading-[1.3em] text-[#f1683a]">ANIMAL</div>
-                            <div className="des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit facere fuga esse aspernatur labore, recusandae nobis vero mollitia illum eum voluptas voluptate enim reprehenderit et reiciendis debitis quo. Numquam facere harum accusantium, similique odit deleniti vero quo quas aut nesciunt est autem delectus dignissimos error eum aperiam reprehenderit aspernatur dolores.
-                            </div>
-                            <div className="buttons grid grid-cols-two grid-rows-[40px] gap-[5px] mt-5">
-                                <button className="border-none bg-white text-black tracking-[3px] font-[Poppins] font-medium">SEE MORE</button>
-                                <button className="bg-transparent text-white border border-white tracking-[3px] font-[Poppins] font-medium">SUBSCRIBE</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="item absolute inset-0 ">
-                        <img src="/img3.jpg" className="w-full h-full object-cover" />
-                        <div className="absolute top-[20%] w-[1140px] max-w-[80%] left-[50%] -translate-x-[50%] pr-[30%] box-border text-white shadow-md">
-                            <div className="author font-bold tracking-[10px]">LUNDEV</div>
-                            <div className="title font-bold text-[5em] leading-[1.3em]">DESIGN SLIDER</div>
-                            <div className="topic font-bold text-[5em] leading-[1.3em] text-[#f1683a]">ANIMAL</div>
-                            <div className="des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit facere fuga esse aspernatur labore, recusandae nobis vero mollitia illum eum voluptas voluptate enim reprehenderit et reiciendis debitis quo. Numquam facere harum accusantium, similique odit deleniti vero quo quas aut nesciunt est autem delectus dignissimos error eum aperiam reprehenderit aspernatur dolores.
-                            </div>
-                            <div className="buttons grid grid-cols-two grid-rows-[40px] gap-[5px] mt-5">
-                                <button className="border-none bg-white text-black tracking-[3px] font-[Poppins] font-medium">SEE MORE</button>
-                                <button className="bg-transparent text-white border border-white tracking-[3px] font-[Poppins] font-medium">SUBSCRIBE</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="item absolute inset-0 ">
-                        <img src="/img4.jpg" className="w-full h-full object-cover" />
-                        <div className="absolute top-[20%] w-[1140px] max-w-[80%] left-[50%] -translate-x-[50%] pr-[30%] box-border text-white shadow-md">
-                            <div className="author font-bold tracking-[10px]">LUNDEV</div>
-                            <div className="title font-bold text-[5em] leading-[1.3em]">DESIGN SLIDER</div>
-                            <div className="topic font-bold text-[5em] leading-[1.3em] text-[#f1683a]">ANIMAL</div>
-                            <div className="des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit facere fuga esse aspernatur labore, recusandae nobis vero mollitia illum eum voluptas voluptate enim reprehenderit et reiciendis debitis quo. Numquam facere harum accusantium, similique odit deleniti vero quo quas aut nesciunt est autem delectus dignissimos error eum aperiam reprehenderit aspernatur dolores.
-                            </div>
-                            <div className="buttons grid grid-cols-two grid-rows-[40px] gap-[5px] mt-5">
-                                <button className="border-none bg-white text-black tracking-[3px] font-[Poppins] font-medium">SEE MORE</button>
-                                <button className="bg-transparent text-white border border-white tracking-[3px] font-[Poppins] font-medium">SUBSCRIBE</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* thumbnail */}
-                <div className="thumbnail absolute bottom-[50px] left-[50%] w-max z-50 flex gap-5">
-                    <div className="w-[150px] h-[220px] shrink-0 relative">
-                        <img src="/img2.jpg" className="w-full h-full object-cover rounded-[20px]" />
-                        <div className="absolute bottom-[10px] left-[10px] right-[10px]">
-                            <div className="font-bold">
-                                Name Slider
-                            </div>
-                            <div className="des">
-                                Description
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-[150px] h-[220px] shrink-0 relative">
-                        <img src="/img3.jpg" className="w-full h-full object-cover rounded-[20px]" />
-                        <div className="absolute bottom-[10px] left-[10px] right-[10px]">
-                            <div className="font-bold">
-                                Name Slider
-                            </div>
-                            <div className="des">
-                                Description
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-[150px] h-[220px] shrink-0 relative">
-                        <img src="/img4.jpg" className="w-full h-full object-cover rounded-[20px]" />
-                        <div className="absolute bottom-[10px] left-[10px] right-[10px]">
-                            <div className="font-bold">
-                                Name Slider
-                            </div>
-                            <div className="des">
-                                Description
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-[150px] h-[220px] shrink-0 relative">
-                        <img src="/img1.jpg" className="w-full h-full object-cover rounded-[20px]"/>
-                        <div className="absolute bottom-[10px] left-[10px] right-[10px]">
-                            <div className="font-bold">
-                                Name Slider
-                            </div>
-                            <div className="des">
-                                Description
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* arrows */}
-                <div className="absolute top-[80%] right-[52%] w-[300px] max-w-[30%] flex gap-[10px] items-center z-50">
-                    <button className="w-10 h-10 rounded-[50%] bg-[#eee4] border-none font-mono font-bold text-lg duration-500 text-white hover:bg-[#eee] hover:text-[#555] flex justify-center items-center">
-                    <ChevronLeft size={30} strokeWidth={3} />
-                    </button>
-                    <button className="w-10 h-10 rounded-[50%] bg-[#eee4] border-none font-mono font-bold text-lg duration-500 text-white hover:bg-[#eee] hover:text-[#555] flex justify-center items-center">
-                        <ChevronRight size={30} strokeWidth={3} />
-                    </button>
-                </div>
             </div>
-        </>
+
+            {/* Left Arrow */}
+            <div className="hidden group-hover:flex absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 text-2xl h-[668px] rounded-tl-2xl rounded-bl-2xl p-4 bg-black/20 items-center text-white cursor-pointer" onClick={prevSlide}>
+                <BsChevronCompactLeft strokeWidth={1} size={30} />
+            </div>
+            
+            {/* Right Arrow */}
+            <div className="hidden group-hover:flex absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 text-2xl h-[668px] rounded-tr-2xl rounded-br-2xl p-4 bg-black/20 items-center text-white cursor-pointer" onClick={nextSlide}>
+                <BsChevronCompactRight strokeWidth={1} size={30} />
+            </div>
+
+            <div className="absolute flex justify-center w-full bottom-[100px]">
+                {slides.map((slide, slideIndex) => (
+                    <div key={slideIndex} onClick={() => goToSlide(slideIndex)} className="text-2xl cursor-pointer hover:rounded-full hover:bg-black/20 hover:text-gray-200 duration-500">
+                        <RxDotFilled />
+                    </div>
+                ))}
+            </div>
+
+        </div>
     )
 }
